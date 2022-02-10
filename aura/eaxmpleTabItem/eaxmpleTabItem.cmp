@@ -1,0 +1,33 @@
+<aura:component >
+    <aura:attribute name="node" type="Object" />
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'New', 'value': 'new'},
+                                                        {'label': 'In Progress', 'value': 'inProgress'},
+                                                        {'label': 'Finished', 'value': 'finished'},
+                                                        ]"/>
+    
+    
+    <aura:attribute name="listOfOptions" type="List" default="[{ 'label': 'Option1', 'value': 'Option1' },
+                                                              { 'label': 'Option2', 'value': 'Option2' },
+                                                              { 'label': 'Option3', 'value': 'Option3' }]"/>
+    <tr class="slds-hint-parent">
+        <td>
+            <div class="slds-truncate">{!v.node.title}</div>
+        </td>
+        <td>
+            <div class="slds-truncate">
+                <lightning:input value="{!v.node.display}" variant="label-hidden"/>
+            </div>
+        </td>
+        <td>
+            <div>
+                <lightning:combobox name="type" variant="label-hidden" value="{!v.node.type}" options="{! v.listOfOptions }"/>
+            </div>
+        </td>
+        <td>
+            <div class="slds-truncate">
+                <lightning:input value="{!v.node.value}" variant="label-hidden"/>
+            </div>
+        </td>
+    </tr>
+</aura:component>

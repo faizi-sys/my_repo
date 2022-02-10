@@ -1,0 +1,41 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="listofNodes" type="list"/>
+        <aura:handler name="init" value="{!this}" action ="{!c.doinit}"/>
+        	<lightning:card title="custom UI" >
+        		<lightning:tabset selectedTabId="two">
+        			<lightning:tab label="Input" id="one">
+        				<lightning:card>
+            				<aura:set attribute="actions">
+                				<lightning:button label="Save"/>
+            				</aura:set>
+            				<table class="slds-p-around--small slds-tbale slds-tbale_cell-buffer slds-table_bordered">
+            					<thead>
+                                    <tr class="slds-line-hight_reset">
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Control">Control</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Display">Display</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Type">Type</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Value">Value</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.listofNodes}" var="item">
+                                    	<c:ExampleTabItem node="{!item}"/>
+                                    </aura:iteration>
+                                </tbody>
+            				</table>
+            			</lightning:card>     
+        			</lightning:tab>
+                    <lightning:tab label="Next Page Validation" id="two">
+                    	Content
+                    </lightning:tab>
+        		</lightning:tabset>
+        	</lightning:card>
+</aura:component>

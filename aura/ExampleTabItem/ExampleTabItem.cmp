@@ -1,0 +1,23 @@
+<aura:component >
+    <aura:attribute name="node" type="object"/>
+    <tr class="slds-hint-parent">
+        <td>
+            <div class="slds-truncate">{!v.node.title}</div>
+        </td>
+        <td>
+            <div class="slds-truncate">
+                <lightning:input value="{!v.node.display}" varient="label-hidden"/>	
+            </div>
+        </td>
+        <td>
+            <div class="slds-truncate">
+                <lightning:input value="{!v.node.value}" varient="label-hidden"/>	
+            </div>
+        </td>
+        <td>
+            <div class="slds-truncate">
+                <lightning:input value="{!v.node.type}" varient="label-hidden"/>	
+            </div>
+        </td>
+    </tr>
+</aura:component>

@@ -1,0 +1,88 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="listOfNodes" type="List"/>
+    <aura:attribute name="listOfMenus" type="List"/>
+    <aura:attribute name="showPanel" type="Boolean" default="false"/>
+    <aura:attribute name="pageName" type="String" />
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+ 
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
+    <lightning:card title="Custom UI">
+        <aura:set attribute="actions">
+            <lightning:button label="Save" onclick="{!c.showRawJSON}"/>
+        </aura:set>
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="6">
+                <lightning:input value="{!v.pageName}" label="Page" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <lightning:input value="" label="iframe" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:tabset selectedTabId="one">
+            <lightning:tab label="Input" id="one">
+                <lightning:card>
+                    <aura:set attribute="actions">
+                        <lightning:buttonIcon iconName="utility:rows" variant="bare" onclick="{! c.showPanel}" alternativeText="Settings" title="Settings" />
+                    </aura:set>
+                    <lightning:layout multipleRows="true">
+                        <lightning:layoutItem padding="around-small" size="{!if(v.showPanel,'10','12')}">
+                            <table class="slds-box slds-p-around--small slds-table slds-table_cell-buffer slds-table_bordered">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Control">Control</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Display">Display</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Type">Type</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Value">Value</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.listOfNodes}" var="item">
+                                        <c:eaxmpleTabItem node="{!item}"/>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </lightning:layoutItem>
+                        <aura:if isTrue="{!v.showPanel}">
+                            <lightning:layoutItem padding="around-small" size="2">
+                                <table class="slds-box slds-p-around--small slds-table slds-table_cell-buffer slds-table_bordered">
+                                    <tbody>  
+                                        <aura:iteration items="{!v.listOfMenus}" var="menuItem">
+                                            <tr class="slds-line-height_reset">
+                                                <td class="" scope="col">
+                                                    <lightning:button label="{!menuItem.label}" name="{!menuItem.label}" variant="bare"  iconName="{!menuItem.icon}" iconPosition="left" onclick="{!c.buttonClick}"/>
+                                                </td>
+                                            </tr>
+                                        </aura:iteration>
+                                    </tbody>
+                                </table>
+                            </lightning:layoutItem>
+                        </aura:if>
+                    </lightning:layout>
+                </lightning:card>
+            </lightning:tab>
+            <lightning:tab label="Next Page Validation" id="two">
+                Two Content !
+            </lightning:tab>
+            <lightning:tab label="Test Cases" id="testCases">
+                <lightning:card title="Custom UI">
+                    <aura:set attribute="actions">
+                        <lightning:buttonIcon iconName="utility:add"  variant="border-filled" alternativeText="Settings" title="Settings" onclick="{!c.handleShowModal}" />
+                        <lightning:buttonIcon iconName="utility:edit"  variant="border-filled" alternativeText="Settings" title="Settings" />
+                    </aura:set>
+                    <lightning:input value="" variant="label-hidden" class="slds-m-around--small" />
+                </lightning:card>
+            </lightning:tab>
+        </lightning:tabset>
+    </lightning:card>
+</aura:component>
